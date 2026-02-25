@@ -1,59 +1,167 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/85a16281-31b9-4fe0-9338-96a79ecf74e9" />
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+Ticket Booking System - Laravel Assignment
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+This is a simplified ticket booking application built for the Server-side Web Programming course at ELTE. The application allows users to browse events and purchase tickets with dynamic pricing, while providing an administrative interface for event and seat management.
+🚀 Quick Start
+Prerequisites
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+    PHP 8.2+
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+    Composer
 
-## Learning Laravel
+    SQLite
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+Installation
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+    Clone or extract the project.
 
-## Laravel Sponsors
+    Install dependencies:
+    Bash
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    composer install
+    npm install && npm run build
 
-### Premium Partners
+    Environment setup:
+    Bash
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+    cp .env.example .env
+    # Ensure DB_CONNECTION is set to sqlite in .env
+    touch database/database.sqlite
 
-## Contributing
+    Generate App Key:
+    Bash
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    php artisan key:generate
 
-## Code of Conduct
+    Database Setup & Seeding:
+    Bash
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    php artisan migrate:fresh --seed
 
-## Security Vulnerabilities
+    Run the server:
+    Bash
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+    php artisan serve
 
-## License
+Project Structure
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The application is built on the Laravel 12 framework, following the MVC (Model-View-Controller) pattern. Below is an overview of the key directories based on the implementation:
+1. Models & Business Logic (app/Models/)
+
+This directory contains the core entities and their relationships:
+
+    Event.php: Manages event data, descriptions, and dynamic pricing toggles.
+
+    Seat.php: Represents physical seating with unique identification (e.g., "A123").
+
+    Ticket.php: Handles the logic for purchased tickets, linking users, events, and seats.
+
+    User.php: The default Laravel user model, extended with an admin flag.
+
+2. Database Schema & Migrations (database/migrations/)
+
+The database structure is defined through version-controlled migration files:
+
+    create_seats_table.php: Defines the unique seat numbering and base pricing.
+
+    create_events_table.php: Sets up the fields for event timing, descriptions, and image paths.
+
+    create_tickets_table.php: Ensures database-level integrity for unique ticket barcodes and foreign key constraints.
+
+3. Data Seeding & Factories (database/seeders/ & database/factories/)
+
+To ensure the application is ready for testing immediately after installation, the following are used:
+
+    Factories: (EventFactory.php, SeatFactory.php, etc.) Use the Faker library to generate realistic, non-hardcoded data.
+
+    Seeders: Populate the SQLite database while maintaining logical consistency (e.g., ensuring ticket sales start before the event begins).
+
+4. Routing (routes/)
+
+    web.php: This is the application's command center. It defines all public routes (Event list/details) and protected routes (Admin dashboard, ticket purchasing). Access control is managed here via middleware to ensure only administrators can reach sensitive management features.
+
+5. User Interface (resources/views/)
+
+    Contains the Blade templates. All features are accessible through a functional frontend, including seat selection, the admin dashboard, and scannable barcode displays.
+
+🛠 Implemented Features
+
+    Database & Models: Fully relational schema with SQLite.
+
+    Dynamic Seeding: Automated data generation with consistent relationships.
+
+    Event Homepage: Future events list with pagination and availability indicators.
+
+    Detailed Event View: Full event information accessible to all users.
+
+    Ticket Purchase: Seat selection system with purchase limits and real-time validation.
+
+    Dynamic Pricing: Implementation of the supply-demand pricing formula.
+
+    My Tickets: Grouped list of purchased tickets with scannable barcode display.
+
+    Admin Dashboard: Statistics on sales, revenue, and seat popularity.
+
+    Event CRUD: Full administrative control over event creation and modification.
+
+    Seat Management: Dedicated interface for managing venue seating.
+
+    Ticket Validation: Admin tool for "scanning" barcodes and logging entry timestamps.
+The system uses the following core models:
+
+    User: Extended with an admin boolean flag.
+
+    Event: Stores event details, description (max 1000 chars), dates, and dynamic pricing toggle.
+
+    Seat: Defines available seats with a unique code (e.g., A123) and base price.
+
+    Ticket: Links users, events, and seats. Stores final price, barcode (9 digits), and admission timestamp.
+
+Dynamic Pricing Logic
+
+If an event has is_dynamic_price enabled, the ticket price is calculated using the following formula:
+Price=BasePrice×(1+DaysUntil+11​)×(1+Occupancy)
+Administrative Functions
+
+    Dashboard: High-level statistics (total sales, revenue, top 3 seats).
+
+    Event Management: Create, Edit, and Delete events (with restrictions if sales have started).
+
+    Seat Management: CRUD operations for venue seats.
+
+    Ticket Validation: Admin interface to scan/input barcodes and record entry times.
+
+Technologies Used
+
+    Framework: Laravel 12
+
+    Database: SQLite
+
+    Authentication: Laravel Breeze (Starter Kit)
+
+    Frontend: Blade templates with Tailwind CSS
+
+Screenshots
+
+Event menu
+<img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/3fd68abb-d24c-4f6a-9d0d-3399411d9d34" />
+
+Seats
+white: free black: taken grey: selected
+<img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/61cdbc03-0b4f-4007-b9a1-c5e99a9c611a" />
+
+Bought tickets
+<img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/f85dd0b5-fdb9-4124-a389-f72d761fd1a0" />
+
+Admin Board with:
+  Event add/modify/delete
+  Seat: add/modify/delete
+<img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/f3f44379-d7a4-44bf-a67e-f6a822387a66" />
+
+Adding new event
+<img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/0822b4b6-2771-4210-b1b4-723993efb583" />
+
+
+  
