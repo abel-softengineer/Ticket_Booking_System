@@ -1,9 +1,9 @@
 <img width="1920" height="971" alt="image" src="https://github.com/user-attachments/assets/85a16281-31b9-4fe0-9338-96a79ecf74e9" />
 
 
-Ticket Booking System - Laravel Assignment
+Ticket Booking System - Laravel
 
-This is a simplified ticket booking application built for the Server-side Web Programming course at ELTE. The application allows users to browse events and purchase tickets with dynamic pricing, while providing an administrative interface for event and seat management.
+This is a simplified ticket booking application in Laravel. The application allows users to browse events and purchase tickets with dynamic pricing, while providing an administrative interface for event and seat management.
 🚀 Quick Start
 Prerequisites
 
